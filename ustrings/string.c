@@ -35,7 +35,9 @@ SDarray* SDarray_new(size_t init_cap) {
 }
 
 void SDarray_free(SDarray *array) {
-  // i need to free individual strings
+  for(size_t i = 0; i < array->size; i++) {
+    free(array->data[i]);
+  }
   free(array->data);
   free(array);
 }
@@ -43,7 +45,7 @@ void SDarray_free(SDarray *array) {
 void SDarray_push(SDarray *array, u8 *string) {
   if (array->size + 1 <= array->capacity){
   u8 *new_string = malloc(u8_strlen(string) + 1);
-  memcpy(new_string, string, u8_strlen(string));
+  memcpy(new_string, string, u8_strlen(string) + 1);
   array->data[array->size] = new_string;
   array->size++;
 
@@ -53,9 +55,18 @@ void SDarray_push(SDarray *array, u8 *string) {
   }
 }
 
+u8* SDarray_get(SDarray* array, size_t index) {
+  if (array->size <= index) {
+    fprintf(stderr, "Error: tried to access out of bound array element\n");
+    exit(EXIT_FAILURE);
+  } else {
+    return array->data[index];
+  }
+}
+
 void SDarray_print(SDarray *array) {
-  for (u8 i = 0; i < array->size; i++) {
-    fprintf(stdout, "%d: %s\n", i, array->data[i]);
+  for (size_t i = 0; i < array->size; i++) {
+    fprintf(stdout, "%zu: %s\n", i, array->data[i]);
   }
 }
 
@@ -68,6 +79,8 @@ int main() {
   SDarray_push(darr, (u8*)"test2");
   SDarray_push(darr, (u8*)"test3");
 
+  u8 *obt = SDarray_get(darr, 2);
+  printf("String at index: %d: %s\n", 2, obt);
 
   SDarray_print(darr);
 }
