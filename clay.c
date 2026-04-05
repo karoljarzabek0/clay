@@ -1,5 +1,8 @@
 #include "clay.h"
 #include <string.h>
+#include <unicase.h>
+#include <uninorm.h>
+#include <unistr.h>
 
 
 
@@ -49,19 +52,25 @@ void ClayArray_print(ClayArray *array) {
 }
 
 // String utility functions
-ClayArray* clay_strsplit(u8 *s, char delimiter) {
+ClayArray* clay_strsplit(u8 *s, const char *delimiters) {
   ClayArray *str_arr = ClayArray_init();
-  char *str_iter = strtok((char*)s, &delimiter);
+  u8 *str_iter = (u8*) strtok((char*)s, delimiters);
   while (str_iter != 0) {
-    ClayArray_push(str_arr, (u8*) str_iter);
-    str_iter = strtok(NULL, &delimiter);
+    size_t _;
+    u8 *str_lower = u8_tolower(str_iter, u8_strlen(str_iter) + 1, NULL, UNINORM_NFC, NULL, &_);
+    ClayArray_push(str_arr, (u8*) str_lower);
+    // Free to prevent memory leaks (push create its onw copy)
+    free(str_lower);
+    str_iter = (u8*) strtok(NULL, delimiters);
   }
 
   return str_arr;
 }
 
 int main() {
-  u8 string[] = "Ala ma kota, psa i papugę";
-  ClayArray* arr = clay_strsplit(string, ' ');
+  u8 string[] = "Ala ma kota, psa i papugę   test . test2";
+  ClayArray* arr = clay_strsplit(string, " ,.!?;:\t\n\r");
   ClayArray_print(arr);
+
+  ClayArray_free(arr);
 }

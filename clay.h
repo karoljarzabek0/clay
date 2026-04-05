@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <unistr.h>
+#include <unicase.h>
 #include <string.h>
 
 typedef uint8_t u8;
@@ -44,7 +45,7 @@ typedef struct {
 //
 
 // String helper functions
-ClayArray* clay_strsplit(u8 *s, char delimiter);
+ClayArray* clay_strsplit(u8 *s, const char *delimiters);
 
 
 
