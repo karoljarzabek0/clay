@@ -1,29 +1,6 @@
-#include <stddef.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistdio.h>
-#include <unistr.h>
-#include <stdio.h>
+#include "clay.h"
 
-typedef uint8_t u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
-typedef int8_t i8;
-typedef int16_t i16;
-typedef int32_t i32;
 
-size_t u8_codlen(u8 *string) {
-    size_t units = u8_strlen(string); 
-    size_t codepoints = u8_mbsnlen(string, units);
-    return codepoints;
-}
-
-typedef struct {
-  size_t size;
-  size_t capacity;
-  u8 **data;
-} ClayArray;
 
 ClayArray* ClayArray_init(size_t init_cap) {
   ClayArray *array = malloc(sizeof(ClayArray));
@@ -70,17 +47,6 @@ void ClayArray_print(ClayArray *array) {
   }
 }
 
-ClayArray* u8_split(u8 *string, char delimiter);
 
-int main() {
-  ClayArray *darr = ClayArray_new(10);
-  ClayArray_push(darr, (u8*)"test");
-  ClayArray_push(darr, (u8*)"test1");
-  ClayArray_push(darr, (u8*)"test2");
-  ClayArray_push(darr, (u8*)"test3");
-
-  u8 *obt = ClayArray_get(darr, 2);
-  printf("String at index: %d: %s\n", 2, obt);
-
-  ClayArray_print(darr);
-}
+// String utility functions
+ClayArray* clay_strsplit(u8 *s, char delimiter);
