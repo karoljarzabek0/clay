@@ -35,19 +35,39 @@ SDarray* SDarray_new(size_t init_cap) {
 }
 
 void SDarray_free(SDarray *array) {
+  // i need to free individual strings
   free(array->data);
   free(array);
 }
 
-void SDarray_push(SDarray *array, u8 *string);
+void SDarray_push(SDarray *array, u8 *string) {
+  if (array->size + 1 <= array->capacity){
+  u8 *new_string = malloc(u8_strlen(string) + 1);
+  memcpy(new_string, string, u8_strlen(string));
+  array->data[array->size] = new_string;
+  array->size++;
+
+  } else {
+    fprintf(stderr, "Error: array full\n");
+    exit(EXIT_FAILURE);
+  }
+}
+
+void SDarray_print(SDarray *array) {
+  for (u8 i = 0; i < array->size; i++) {
+    fprintf(stdout, "%d: %s\n", i, array->data[i]);
+  }
+}
 
 SDarray* u8_split(u8 *string, char delimiter);
 
 int main() {
-  // Cast the string literal to uint8_t* as expected by the library
-    uint8_t *string = (uint8_t *)"Aąbćdeę";
-    size_t units = u8_strlen(string);
-    size_t codepoints = u8_codlen(string);
-    
- printf("Len: %zu, Ulen: %zu\n", units, codepoints);
+  SDarray *darr = SDarray_new(10);
+  SDarray_push(darr, (u8*)"test");
+  SDarray_push(darr, (u8*)"test1");
+  SDarray_push(darr, (u8*)"test2");
+  SDarray_push(darr, (u8*)"test3");
+
+
+  SDarray_print(darr);
 }
