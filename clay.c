@@ -1,12 +1,13 @@
 #include "clay.h"
+#include <string.h>
 
 
 
-ClayArray* ClayArray_init(size_t init_cap) {
+ClayArray* ClayArray_init() {
   ClayArray *array = malloc(sizeof(ClayArray));
-  array->capacity = init_cap;
+  array->capacity = CLAY_ARRAY_INIT_CAPACITY;
   array->size = 0;
-  array->data = malloc(init_cap * sizeof(u8*));
+  array->data = malloc(CLAY_ARRAY_INIT_CAPACITY * sizeof(u8*));
 
   return array;
 }
@@ -47,6 +48,20 @@ void ClayArray_print(ClayArray *array) {
   }
 }
 
-
 // String utility functions
-ClayArray* clay_strsplit(u8 *s, char delimiter);
+ClayArray* clay_strsplit(u8 *s, char delimiter) {
+  ClayArray *str_arr = ClayArray_init();
+  char *str_iter = strtok((char*)s, &delimiter);
+  while (str_iter != 0) {
+    ClayArray_push(str_arr, (u8*) str_iter);
+    str_iter = strtok(NULL, &delimiter);
+  }
+
+  return str_arr;
+}
+
+int main() {
+  u8 string[] = "Ala ma kota, psa i papugę";
+  ClayArray* arr = clay_strsplit(string, ' ');
+  ClayArray_print(arr);
+}

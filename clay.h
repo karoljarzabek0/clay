@@ -11,6 +11,7 @@ typedef int8_t i8;
 typedef int16_t i16;
 typedef int32_t i32;
 
+#define CLAY_ARRAY_INIT_CAPACITY 10
 
 // Dynamic array of null-terminated strings
 typedef struct {
