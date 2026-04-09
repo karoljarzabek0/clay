@@ -14,6 +14,8 @@ typedef int32_t i32;
 
 #define CLAY_ARRAY_INIT_CAPACITY 256
 #define CLAY_HT_INIT_CAPAACITY 256
+#define HT_PRIME_1 1111111111
+#define HT_PRIME_2 1111111117
 
 // Dynamic array of null-terminated strings
 typedef struct {
@@ -51,7 +53,7 @@ typedef struct {
 clay_ht* clay_ht_init();
 void clay_ht_free(clay_ht *ht);
 static _clay_ht_item* _clay_ht_new_item(const u8 *key, const u8 *value);
-static void _clay_ht_free_item(const u8 *key);
+static void _clay_ht_free_item(_clay_ht_item *item);
 void clay_ht_insert(clay_ht *ht, const u8 *key, const u8 *value);
 u8* clay_ht_search(clay_ht *ht, const u8 *key);
 void clay_ht_delete(clay_ht *ht, const u8 *key);
