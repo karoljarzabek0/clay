@@ -1,4 +1,6 @@
 #include "clay.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unicase.h>
 #include <uninorm.h>
@@ -51,6 +53,27 @@ void ClayArray_print(ClayArray *array) {
   }
 }
 
+////////////////////////////////////////////
+/// HashTable
+/// ///////////////////////////////////////
+
+
+clay_ht* clay_ht_init() {
+  clay_ht *ht = malloc(sizeof(clay_ht));
+  ht->capacity = CLAY_ARRAY_INIT_CAPACITY;
+  ht->size = 0;
+  ht->items = calloc(ht->size, sizeof(_clay_ht_item*));
+
+  return ht;
+}
+void clay_ht_free(clay_ht *ht);
+static _clay_ht_item* _clay_ht_new_item(const u8 *key, const u8 *value);
+static void _clay_ht_free_item(const u8 *key);
+void clay_ht_insert(clay_ht *ht, const u8 *key, const u8 *value);
+u8* clay_ht_search(clay_ht *ht, const u8 *key);
+void clay_ht_delete(clay_ht *ht, const u8 *key);
+
+
 // String utility functions
 ClayArray* clay_strsplit(u8 *s, const char *delimiters) {
   ClayArray *str_arr = ClayArray_init();
@@ -59,17 +82,24 @@ ClayArray* clay_strsplit(u8 *s, const char *delimiters) {
     size_t _;
     u8 *str_lower = u8_tolower(str_iter, u8_strlen(str_iter) + 1, NULL, UNINORM_NFC, NULL, &_);
     ClayArray_push(str_arr, (u8*) str_lower);
-    // Free to prevent memory leaks (push create its onw copy)
+    // Free to prevent memory leaks (push creates its onw copy)
     free(str_lower);
     str_iter = (u8*) strtok(NULL, delimiters);
   }
-
   return str_arr;
+}
+
+ClayArray* tokenize(u8 *s) {
+  const char *del = " ,.!?;:\t\n\r"; 
+  return clay_strsplit(s, del);
 }
 
 int main() {
   u8 string[] = "Ala ma kota, psa i papugę   test . test2";
-  ClayArray* arr = clay_strsplit(string, " ,.!?;:\t\n\r");
+  for (u8 i = 0; i < strlen((char*)string); i++) {
+    printf("%c|", string[i]);
+  }
+  ClayArray* arr = tokenize(string);
   ClayArray_print(arr);
 
   ClayArray_free(arr);
