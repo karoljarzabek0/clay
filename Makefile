@@ -1,14 +1,15 @@
 CC=gcc
 DEBUGFLAGS=-g -Wall -Wextra
-IFLAGS=-I./include/
+IFLAGS=-I./include/ -lunistring -lm
 
 SRC=src
 BUILD=build
 SRCS=$(wildcard $(SRC)/*.c)
 OBJS=$(patsubst $(SRC)/%.c, $(BUILD)/%.o, $(SRCS))
-EXE=clay
+EXE=play
 
 all: $(EXE)
+	time ./play
 
 $(EXE): $(OBJS) $(BUILD)
 	$(CC) $(DEBUGFLAGS) $(OBJS) -o $@ $(IFLAGS)
