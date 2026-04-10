@@ -20,5 +20,9 @@ $(BUILD)/%.o: $(SRC)/%.c $(BUILD)
 $(BUILD):
 	mkdir -p $@
 
+trie: $(SRC)/trie.c
+	$(CC) $(DEBUGFLAGS) $< -o $@ $(IFLAGS)
+	./trie
+
 clean:
 	rm -rf $(BUILD)
