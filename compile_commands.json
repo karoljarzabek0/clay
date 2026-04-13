@@ -1,0 +1,82 @@
+[
+  {
+    "file": "src/array.c",
+    "arguments": [
+      "/usr/sbin/gcc",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-c",
+      "src/array.c",
+      "-o",
+      "build/array.o",
+      "-I./include/"
+    ],
+    "directory": "/home/karol/Desktop/clay",
+    "output": "build/array.o"
+  },
+  {
+    "file": "src/fts.c",
+    "arguments": [
+      "/usr/sbin/gcc",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-c",
+      "src/fts.c",
+      "-o",
+      "build/fts.o",
+      "-I./include/"
+    ],
+    "directory": "/home/karol/Desktop/clay",
+    "output": "build/fts.o"
+  },
+  {
+    "file": "src/helpers.c",
+    "arguments": [
+      "/usr/sbin/gcc",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-c",
+      "src/helpers.c",
+      "-o",
+      "build/helpers.o",
+      "-I./include/"
+    ],
+    "directory": "/home/karol/Desktop/clay",
+    "output": "build/helpers.o"
+  },
+  {
+    "file": "src/play.c",
+    "arguments": [
+      "/usr/sbin/gcc",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-c",
+      "src/play.c",
+      "-o",
+      "build/play.o",
+      "-I./include/"
+    ],
+    "directory": "/home/karol/Desktop/clay",
+    "output": "build/play.o"
+  },
+  {
+    "file": "src/trie.c",
+    "arguments": [
+      "/usr/sbin/gcc",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-c",
+      "src/trie.c",
+      "-o",
+      "build/trie.o",
+      "-I./include/"
+    ],
+    "directory": "/home/karol/Desktop/clay",
+    "output": "build/trie.o"
+  }
+]

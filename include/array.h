@@ -11,18 +11,18 @@ typedef struct {
   size_t capacity;
   size_t size;
   u8 **data;
-} ClayArray;
+} clay_array;
 
 // Initializes the array
-ClayArray* ClayArray_init();
+clay_array* clay_array_init();
 // Frees the array
-void ClayArray_free(ClayArray *a);
+void clay_array_free(clay_array *a);
 // Helper function
 // ClayArray* _ClayArray_resize(ClayArray* a, size_t new_cap);
 // Add a string at the end of the array
-void ClayArray_push(ClayArray *a, u8 *s);
+void clay_array_push(clay_array *a, u8 *s);
 // Get string at a given index
-u8* ClayArray_get(ClayArray *a, size_t i);
-void ClayArray_print(ClayArray *array); 
+u8* clay_array_get(clay_array *a, size_t i);
+void clay_array_print(clay_array *array); 
 
 #endif

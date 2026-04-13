@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
-ClayArray *ClayArray_init() {
-  ClayArray *array = malloc(sizeof(ClayArray));
+clay_array *clay_array_init() {
+  clay_array *array = malloc(sizeof(clay_array));
   array->capacity = CLAY_ARRAY_INIT_CAPACITY;
   array->size = 0;
   array->data = malloc(CLAY_ARRAY_INIT_CAPACITY * sizeof(u8 *));
@@ -11,7 +11,7 @@ ClayArray *ClayArray_init() {
   return array;
 }
 
-void ClayArray_free(ClayArray *array) {
+void clay_array_free(clay_array *array) {
   for (size_t i = 0; i < array->size; i++) {
     free(array->data[i]);
   }
@@ -19,7 +19,7 @@ void ClayArray_free(ClayArray *array) {
   free(array);
 }
 
-void ClayArray_push(ClayArray *array, u8 *string) {
+void clay_array_push(clay_array *array, u8 *string) {
   if (array->size + 1 <= array->capacity) {
     u8 *new_string = malloc(u8_strlen(string) + 1);
     memcpy(new_string, string, u8_strlen(string) + 1);
@@ -32,7 +32,7 @@ void ClayArray_push(ClayArray *array, u8 *string) {
   }
 }
 
-u8 *ClayArray_get(ClayArray *array, size_t index) {
+u8 *clay_array_get(clay_array *array, size_t index) {
   if (array->size <= index) {
     fprintf(stderr, "Error: tried to access out of bound array element\n");
     exit(EXIT_FAILURE);
@@ -41,7 +41,7 @@ u8 *ClayArray_get(ClayArray *array, size_t index) {
   }
 }
 
-void ClayArray_print(ClayArray *array) {
+void clay_array_print(clay_array *array) {
   for (size_t i = 0; i < array->size; i++) {
     fprintf(stdout, "%zu: %s\n", i, array->data[i]);
   }

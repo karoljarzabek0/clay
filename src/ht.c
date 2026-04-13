@@ -1,8 +1,8 @@
-#include "types.h"
 #include "ht.h"
+#include "types.h"
+#include <math.h>
 #include <stdlib.h>
 #include <unistr.h>
-#include <math.h>
 ////////////////////////////////////////////
 /// HashTable
 /// ///////////////////////////////////////
@@ -61,5 +61,3 @@ static size_t _clay_ht_get_hash(const u8 *string, const size_t arr_size,
 void clay_ht_insert(clay_ht *ht, const u8 *key, const u8 *value);
 u8 *clay_ht_search(clay_ht *ht, const u8 *key);
 void clay_ht_delete(clay_ht *ht, const u8 *key);
-
-

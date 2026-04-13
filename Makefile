@@ -21,7 +21,7 @@ $(BUILD):
 	mkdir -p $@
 
 trie: $(SRC)/trie.c
-	$(CC) $(DEBUGFLAGS) $< -o $@ $(IFLAGS)
+	$(CC) $(DEBUGFLAGS) $< $(SRC)/array.c $(SRC)/helpers.c -o $@ $(IFLAGS)
 	./trie
 
 clean:
