@@ -5,7 +5,7 @@
 #include <string.h>
 // String utility functions
 clay_array *clay_strsplit(u8 *s, const char *delimiters) {
-  clay_array *str_arr = clay_array_init();
+  clay_array *str_arr = clay_array_init(sizeof(u8*));
   u8 *str_iter = (u8 *)strtok((char *)s, delimiters);
   while (str_iter != 0) {
     size_t _;

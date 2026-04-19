@@ -9,7 +9,7 @@ OBJS=$(patsubst $(SRC)/%.c, $(BUILD)/%.o, $(SRCS))
 EXE=play
 
 all: $(EXE)
-	time ./play
+	./play
 
 $(EXE): $(OBJS) $(BUILD)
 	$(CC) $(DEBUGFLAGS) $(OBJS) -o $@ $(IFLAGS)

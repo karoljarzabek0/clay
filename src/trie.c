@@ -167,11 +167,12 @@ typedef struct TrieNode {
   struct TrieNode *children[32];
 } TrieNode;
 
+#ifdef TRIE
 int main() { 
   u8 *s = (u8*)strdup("Prawną i techniczną odpowiedzialność za Wikisłownik ponosi Fundacja Wikimedia.");
   clay_array *tok_s = tokenize(s);
   for (size_t i = 0; i < tok_s->size; i++) {
-    clay_array *temp_arr = clay_array_init();
+    clay_array *temp_arr = clay_array_init(sizeof(u8*));
     u8 *word = clay_array_get(tok_s, i);
     encode_utf8_to_clay_array(word, u8_strlen(word), temp_arr);
 
@@ -187,3 +188,4 @@ int main() {
     clay_array_free(temp_arr);
   }
 }
+#endif

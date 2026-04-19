@@ -3,13 +3,11 @@
 #include <stdio.h>
 #include <string.h>
 
-clay_array *clay_array_init(size_t element_size) {
+clay_array* clay_array_init() {
   clay_array *array = malloc(sizeof(clay_array));
   array->capacity = CLAY_ARRAY_INIT_CAPACITY;
   array->size = 0;
-  array->element_size = element_size;
-  array->data = malloc(CLAY_ARRAY_INIT_CAPACITY * element_size);
-
+  array->data = malloc(CLAY_ARRAY_INIT_CAPACITY * sizeof(void*));
   return array;
 }
 
@@ -41,9 +39,11 @@ void *clay_array_get(clay_array *array, size_t index) {
   }
 }
 
-/// Currently broken
-void clay_array_print(clay_array *array, const char *fmt) {
+// Accept a function pointer that takes a void* and knows how to print it
+void clay_array_print(clay_array *array, void (*print_element)(void *)) {
   for (size_t i = 0; i < array->size; i++) {
-    fprintf(stdout, "%zu: %s\n", i, array->data[i]);
+    fprintf(stdout, "%zu: ", i);   // %zu is the correct format specifier for size_t
+    print_element(array->data[i]); // Call the custom print function
+    fprintf(stdout, "\n");
   }
 }

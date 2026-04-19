@@ -17,7 +17,7 @@ typedef struct {
 } clay_array;
 
 // Initializes the array
-clay_array* clay_array_init(size_t element_size);
+clay_array* clay_array_init();
 // Frees the array
 void clay_array_free(clay_array *a);
 // Helper function
@@ -26,6 +26,6 @@ void clay_array_free(clay_array *a);
 void clay_array_push(clay_array *array, void *element);
 // Get string at a given index
 void *clay_array_get(clay_array *array, size_t index);
-void clay_array_print(clay_array *array, const char *fmt); 
+void clay_array_print(clay_array *array, void (*print_element)(void *));
 
 #endif

@@ -4,6 +4,6 @@
 int main() {
   u8 *s = (u8*)strdup("Prawną i techniczną odpowiedzialność za Wikisłownik ponosi Fundacja Wikimedia.");
   clay_array *tokens = tokenize(s);
-  clay_array_print(tokens);
+  clay_array_print(tokens, NULL);
 
 }
