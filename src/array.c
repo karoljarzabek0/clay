@@ -47,3 +47,17 @@ void clay_array_print(clay_array *array, void (*print_element)(void *)) {
     fprintf(stdout, "\n");
   }
 }
+
+// Helper function to print an integer
+void print_int(void *element) {
+  // Cast the void* back to an int* and dereference it
+  int *val = (int *)element;
+  printf("%d", *val);
+}
+
+// Helper function to print a string
+void print_string(void *element) {
+  // Cast the void* to a char*
+  char *str = (char *)element;
+  printf("%s", str);
+}

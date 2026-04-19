@@ -28,4 +28,7 @@ void clay_array_push(clay_array *array, void *element);
 void *clay_array_get(clay_array *array, size_t index);
 void clay_array_print(clay_array *array, void (*print_element)(void *));
 
+void print_int(void *element);
+
+void print_string(void *element);
 #endif
